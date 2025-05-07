@@ -104,33 +104,4 @@ int main() {
 		}
 		else {
 
-			int patchWidth = 70;
-			int patchHeight = 70;
-
-			for (int y = regionStartY; y <= regionStartY + regionHeight - patchHeight; y += stepSize) {
-				for (int x = regionStartX; x <= regionStartX + regionWidth - patchWidth; x += stepSize) {
-					Rect window(x, y, patchWidth, patchHeight);
-
-					if (x + patchWidth <= sharpened.cols && y + patchHeight <= sharpened.rows) {
-						Mat patch = sharpened(window);
-						double intensity = mean(patch)[0];
-						if (intensity > maxPatchIntensity) {
-							maxPatchIntensity = intensity;
-							bestBrightSeed = Point(x + patchWidth / 2, y + patchHeight / 2);
-						}
-					}
-				}
-			}
-		}
-	}
-
-	Mat resultImage = resized.clone();
-	if (bestDarkSeed.x != -1)
-		circle(resultImage, bestDarkSeed, 30, Scalar(0, 0, 255), 2);
-	if (bestBrightSeed.x != -1)
-		circle(resultImage, bestBrightSeed, 30, Scalar(255, 0, 0), 2);
-
-	imshow("Detected Tumor Region", resultImage);
-	waitKey(0);
-	return 0;
-}
+			
